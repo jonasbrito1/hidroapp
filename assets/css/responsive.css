@@ -1,0 +1,938 @@
+/**
+ * HidroApp - CSS Responsivo Global
+ * Mobile-First Design
+ * Última atualização: 2025-10-17
+ */
+
+/* ==========================================================================
+   1. VARIÁVEIS CSS (Reutilizáveis)
+   ========================================================================== */
+:root {
+    /* Cores principais */
+    --primary-color: #0066cc;
+    --primary-dark: #004499;
+    --primary-light: #3388dd;
+    --secondary-color: #00b4d8;
+    --secondary-dark: #0096c7;
+    --accent-color: #4a90e2;
+
+    /* Cores de status */
+    --success-color: #52c41a;
+    --success-light: #73d13d;
+    --warning-color: #faad14;
+    --warning-light: #ffc53d;
+    --danger-color: #ff4d4f;
+    --danger-light: #ff7875;
+    --info-color: #40a9ff;
+    --info-light: #69c0ff;
+
+    /* Cores de texto */
+    --text-dark: #1a1a1a;
+    --text-gray: #666666;
+    --text-light: #999999;
+    --text-muted: #a8a8a8;
+
+    /* Cores de fundo */
+    --bg-light: #f8fafc;
+    --bg-white: #ffffff;
+    --bg-gray: #f5f5f5;
+    --bg-dark: #1a1a1a;
+
+    /* Bordas e sombras */
+    --border-color: #e2e8f0;
+    --border-light: #f0f0f0;
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.12);
+    --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.15);
+
+    /* Dimensões */
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 16px;
+    --sidebar-width: 280px;
+    --header-height: 70px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* Transições */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease;
+    --transition-slow: all 0.5s ease;
+
+    /* Tipografia */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+}
+
+/* ==========================================================================
+   2. RESET E CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   3. LAYOUT PRINCIPAL RESPONSIVO
+   ========================================================================== */
+
+/* Container flexível */
+.container-fluid-responsive {
+    width: 100%;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sidebar responsiva */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    z-index: 1000;
+    transition: var(--transition);
+    box-shadow: var(--shadow-heavy);
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar-brand i {
+    font-size: 2rem;
+    margin-right: var(--spacing-sm);
+}
+
+/* Main content responsivo */
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.content-area {
+    padding: var(--spacing-lg);
+    flex: 1;
+}
+
+/* Header responsivo */
+.top-header {
+    background: var(--bg-white);
+    height: var(--header-height);
+    box-shadow: var(--shadow-light);
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* ==========================================================================
+   4. COMPONENTES RESPONSIVOS
+   ========================================================================== */
+
+/* Cards responsivos */
+.card-responsive {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.card-responsive:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.card-header-responsive {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+}
+
+.card-body-responsive {
+    padding: var(--spacing-md);
+}
+
+.card-footer-responsive {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-light);
+}
+
+/* Stat cards */
+.stat-card-responsive {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.stat-card-responsive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.stat-card-responsive:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+/* Tabelas responsivas */
+.table-responsive-custom {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--border-radius);
+}
+
+.table-mobile-cards {
+    display: none;
+}
+
+/* Botões responsivos */
+.btn-responsive {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Formulários responsivos */
+.form-group-responsive {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label-responsive {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: var(--font-size-sm);
+}
+
+.form-control-responsive {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    transition: var(--transition-fast);
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+.form-control-responsive:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Badges responsivos */
+.badge-responsive {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* ==========================================================================
+   5. GRID RESPONSIVO
+   ========================================================================== */
+.grid-responsive {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.grid-responsive-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-responsive-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-responsive-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-responsive-auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* ==========================================================================
+   6. UTILITÁRIOS RESPONSIVOS
+   ========================================================================== */
+
+/* Espaçamentos */
+.mt-responsive { margin-top: var(--spacing-md); }
+.mb-responsive { margin-bottom: var(--spacing-md); }
+.ml-responsive { margin-left: var(--spacing-md); }
+.mr-responsive { margin-right: var(--spacing-md); }
+.mx-responsive { margin-left: var(--spacing-md); margin-right: var(--spacing-md); }
+.my-responsive { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
+
+.pt-responsive { padding-top: var(--spacing-md); }
+.pb-responsive { padding-bottom: var(--spacing-md); }
+.pl-responsive { padding-left: var(--spacing-md); }
+.pr-responsive { padding-right: var(--spacing-md); }
+.px-responsive { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+.py-responsive { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
+
+/* Visibilidade */
+.hide-mobile { display: block; }
+.hide-tablet { display: block; }
+.hide-desktop { display: none; }
+.show-mobile { display: none; }
+.show-tablet { display: none; }
+.show-desktop { display: block; }
+
+/* Texto responsivo */
+.text-center-mobile { text-align: left; }
+.text-truncate-mobile { overflow: visible; white-space: normal; text-overflow: clip; }
+
+/* ==========================================================================
+   7. MEDIA QUERIES - TABLET (768px - 1199px)
+   ========================================================================== */
+@media (max-width: 1199px) {
+    :root {
+        --sidebar-width: 250px;
+        --spacing-lg: 1.5rem;
+    }
+
+    .content-area {
+        padding: var(--spacing-md);
+    }
+
+    .grid-responsive-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hide-tablet {
+        display: none !important;
+    }
+
+    .show-tablet {
+        display: block !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .top-header {
+        padding: 0 var(--spacing-md);
+    }
+
+    .grid-responsive-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-card-responsive {
+        padding: var(--spacing-md);
+    }
+}
+
+/* ==========================================================================
+   8. MEDIA QUERIES - MOBILE (até 767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+    :root {
+        --header-height: 60px;
+        --spacing-sm: 0.75rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.25rem;
+        --font-size-base: 0.9375rem;
+    }
+
+    html {
+        font-size: 15px;
+    }
+
+    /* Sidebar mobile */
+    .sidebar {
+        transform: translateX(-100%);
+        width: 300px;
+        max-width: 85vw;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+        z-index: 1050;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1049;
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    /* Main content mobile */
+    .main-content {
+        margin-left: 0;
+    }
+
+    .content-area {
+        padding: var(--spacing-sm);
+    }
+
+    /* Header mobile */
+    .top-header {
+        height: 60px;
+        padding: 0 var(--spacing-sm);
+    }
+
+    .top-header h4 {
+        font-size: var(--font-size-lg);
+    }
+
+    /* Cards mobile */
+    .stat-card-responsive {
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .card-header-responsive,
+    .card-body-responsive,
+    .card-footer-responsive {
+        padding: var(--spacing-sm);
+    }
+
+    /* Grid mobile */
+    .grid-responsive-2,
+    .grid-responsive-3,
+    .grid-responsive-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-responsive-auto {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tabelas mobile - transformar em cards */
+    .table-responsive-custom table {
+        display: none;
+    }
+
+    .table-mobile-cards {
+        display: block;
+    }
+
+    .table-mobile-card {
+        background: var(--bg-white);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        box-shadow: var(--shadow-light);
+    }
+
+    .table-mobile-card-header {
+        font-weight: 700;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-xs);
+        color: var(--primary-color);
+    }
+
+    .table-mobile-card-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .table-mobile-card-row:last-child {
+        border-bottom: none;
+    }
+
+    .table-mobile-card-label {
+        font-weight: 600;
+        color: var(--text-gray);
+        font-size: var(--font-size-sm);
+    }
+
+    .table-mobile-card-value {
+        color: var(--text-dark);
+        font-size: var(--font-size-sm);
+        text-align: right;
+    }
+
+    /* Botões mobile */
+    .btn-responsive {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-size: var(--font-size-base);
+    }
+
+    .btn-group-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .btn-group-mobile .btn-responsive {
+        width: 100%;
+    }
+
+    /* Formulários mobile */
+    .form-control-responsive {
+        font-size: 16px; /* Prevenir zoom no iOS */
+        padding: 0.875rem 1rem;
+    }
+
+    .form-row-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    /* Utilitários mobile */
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: block !important;
+    }
+
+    .text-center-mobile {
+        text-align: center !important;
+    }
+
+    .text-truncate-mobile {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    /* Navegação mobile */
+    .nav-link {
+        padding: 0.875rem var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+
+    /* Footer mobile */
+    .footer-area {
+        padding: var(--spacing-md) var(--spacing-sm);
+        text-align: center;
+    }
+
+    .footer-area .row > div {
+        text-align: center;
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+/* ==========================================================================
+   9. MEDIA QUERIES - MOBILE PEQUENO (até 575px)
+   ========================================================================== */
+@media (max-width: 575px) {
+    :root {
+        --spacing-xs: 0.375rem;
+        --spacing-sm: 0.625rem;
+        --spacing-md: 0.875rem;
+        --font-size-xs: 0.6875rem;
+        --font-size-sm: 0.8125rem;
+        --font-size-base: 0.875rem;
+    }
+
+    html {
+        font-size: 14px;
+    }
+
+    .content-area {
+        padding: var(--spacing-xs);
+    }
+
+    .stat-card-responsive {
+        padding: var(--spacing-sm);
+    }
+
+    .sidebar {
+        width: 280px;
+        max-width: 90vw;
+    }
+
+    .top-header h4 {
+        font-size: var(--font-size-base);
+    }
+
+    .badge-responsive {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.625rem;
+    }
+
+    /* Dropdown menu mobile */
+    .dropdown-menu {
+        min-width: 100%;
+    }
+}
+
+/* ==========================================================================
+   10. MEDIA QUERIES - LANDSCAPE MOBILE
+   ========================================================================== */
+@media (max-width: 767px) and (orientation: landscape) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .top-header {
+        height: 50px;
+    }
+
+    .content-area {
+        padding: var(--spacing-sm);
+    }
+}
+
+/* ==========================================================================
+   11. ACESSIBILIDADE E PREFERÊNCIAS DO USUÁRIO
+   ========================================================================== */
+
+/* Modo escuro (preparado para futuro) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-light: #1a1a1a;
+        --bg-white: #2d2d2d;
+        --text-dark: #ffffff;
+        --text-gray: #b0b0b0;
+        --border-color: #404040;
+    }
+}
+
+/* Reduzir movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Contraste aumentado */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-responsive,
+    .stat-card-responsive {
+        border: 2px solid var(--border-color);
+    }
+}
+
+/* ==========================================================================
+   12. PRINT STYLES
+   ========================================================================== */
+@media print {
+    .sidebar,
+    .top-header,
+    .footer-area,
+    .btn-responsive,
+    .dropdown,
+    .no-print {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .content-area {
+        padding: 0;
+    }
+
+    .card-responsive,
+    .stat-card-responsive {
+        box-shadow: none;
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+
+    * {
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* ==========================================================================
+   13. ANIMAÇÕES E TRANSIÇÕES
+   ========================================================================== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Hover effects */
+.hover-lift {
+    transition: var(--transition);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ==========================================================================
+   14. SCROLLBAR CUSTOMIZADA
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-light);
+}
+
+/* ==========================================================================
+   15. ESTADOS DE FOCO (Acessibilidade)
+   ========================================================================== */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Remover outline para mouse, manter para teclado */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ==========================================================================
+   16. LOADING STATES
+   ========================================================================== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ==========================================================================
+   17. NOTIFICAÇÕES E ALERTAS RESPONSIVOS
+   ========================================================================== */
+.alert-responsive {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+    border-left: 4px solid;
+}
+
+@media (max-width: 767px) {
+    .alert-responsive {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* ==========================================================================
+   18. MODAIS RESPONSIVOS
+   ========================================================================== */
+@media (max-width: 767px) {
+    .modal-dialog {
+        margin: var(--spacing-sm);
+        max-width: calc(100% - 1rem);
+    }
+
+    .modal-content {
+        border-radius: var(--border-radius-sm);
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-sm);
+    }
+}
+
+/* ==========================================================================
+   19. CLASSES UTILITÁRIAS FINAIS
+   ========================================================================== */
+.w-100-mobile { width: 100%; }
+.h-100-mobile { height: 100%; }
+.d-block-mobile { display: block !important; }
+.d-flex-mobile { display: flex !important; }
+.d-none-mobile { display: none !important; }
+.flex-column-mobile { flex-direction: column !important; }
+.gap-sm-mobile { gap: var(--spacing-sm) !important; }
+.rounded-mobile { border-radius: var(--border-radius) !important; }
+
+@media (max-width: 767px) {
+    .w-100-mobile { width: 100% !important; }
+    .h-100-mobile { height: 100% !important; }
+    .d-block-mobile { display: block !important; }
+    .d-flex-mobile { display: flex !important; }
+    .d-none-mobile { display: none !important; }
+    .flex-column-mobile { flex-direction: column !important; }
+    .gap-sm-mobile { gap: var(--spacing-xs) !important; }
+}

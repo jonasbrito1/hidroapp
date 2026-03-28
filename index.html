@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidro Evolution - Soluções em Energia</title>
+    <meta name="description" content="Hidro Evolution: especialista em geradores, fornecimento e manutenção. Soluções confiáveis em energia para empresas e residências há mais de 4 anos.">
+    <meta name="keywords" content="geradores, energia, manutenção, diesel, cabinados, abertos">
+    <link rel="shortcut icon" href="/utils/hidro_logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e configurações globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #004499;
+            --secondary-color: #00b4d8;
+            --accent-color: #ffb800;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --text-light: #999;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Navegação moderna */
+        nav {
+            position: relative;
+            width: 100%;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logoNavContainer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logoNav {
+            height: 40px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .logoNav:hover {
+            transform: scale(1.05);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: rotate(180deg);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .brand-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: none;
+        }
+
+        .itemsMenuNavList {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .linkMenu {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .linkMenu::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .linkMenu:hover {
+            color: var(--primary-color);
+        }
+
+        .linkMenu:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .hamburger:hover {
+            background: var(--bg-light);
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Seção Hero moderna */
+        #homeSection {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #homeSection::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color)10, transparent);
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .home-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .homeTextContainer {
+            animation: fadeInUp 1s ease-out;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .homeTextContainer {
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .homeTextContainer {
+                text-align: left;
+            }
+            
+            .homeHeartImage {
+                margin: 0 0 2rem 0;
+            }
+        }
+
+        .homeHeartImage {
+            width: clamp(100px, 15vw, 150px);
+            height: auto;
+            margin: 0 auto 2rem auto;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(0, 102, 204, 0.3));
+            transition: var(--transition);
+        }
+
+        .homeHeartImage:hover {
+            transform: scale(1.05);
+        }
+
+        .homeContentTitle {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .homeContentSubtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .homeButtonsContainer {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .homeImageWrapper {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+
+        .homeImage {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-heavy);
+            transition: var(--transition);
+        }
+
+        .homeImage:hover {
+            transform: scale(1.02);
+        }
+
+        /* Seção Sobre modernizada */
+        #aboutSection {
+            padding: 100px 0;
+            background: var(--bg-white);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .aboutImageWrapper {
+            position: relative;
+        }
+
+        .aboutImage {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .aboutContentTitle {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .aboutContentTextItem {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+        }
+
+        .aboutContentTextItem strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .aboutContentQuote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color)05, var(--secondary-color)05);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        /* Seção de Produtos modernizada */
+        #itinerariesSection {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .menuItinerariesTitle {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        #roadItinerariesContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .itineraryCard {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .itineraryCard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .itineraryCard:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .itineraryCardImage {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .itineraryCardTitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .itineraryCardSubtitle {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .itinerariesFooterContainer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+
+        .itinerariesCalToActionText {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        /* Seção de Valores */
+        #valuesSection {
+            padding: 100px 0;
+            background: var(--bg-white);
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .valuesContentWrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .valuesBoxes {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .valuesBoxes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .valuesBoxes:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .valuesTitles {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .valuesText {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Rodapé moderno */
+        footer {
+            background: linear-gradient(135deg, var(--text-dark), #2a2a2a);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .moreContentOptionsWrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-button {
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .footerRowContainer {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footerParagraphDescription {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .home-container,
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-container {
+                grid-template-areas: 
+                    "text"
+                    "image";
+            }
+            
+            .aboutTextWrapper {
+                grid-area: text;
+            }
+            
+            .aboutImageWrapper {
+                grid-area: image;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .brand-text {
+                display: block;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .theme-toggle {
+                order: -1;
+                margin-left: 0;
+            }
+
+            .hamburger {
+                order: 1;
+            }
+
+            .itemsMenuNavList {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 280px;
+                background: var(--bg-white);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                box-shadow: var(--shadow-medium);
+                border-top: 1px solid var(--border-color);
+                border-radius: 0 0 var(--border-radius) var(--border-radius);
+                border: 1px solid var(--border-color);
+                border-top: none;
+            }
+
+            .itemsMenuNavList.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .itemsMenuNavList li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
+            .linkMenu {
+                display: block;
+                padding: 1rem;
+                border-radius: var(--border-radius);
+            }
+
+            .linkMenu:hover {
+                background: var(--bg-light);
+            }
+
+            #homeSection {
+                padding: 60px 0;
+                min-height: auto;
+            }
+
+            .homeContentTitle {
+                font-size: 2.5rem;
+            }
+
+            .homeButtonsContainer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                text-align: center;
+                justify-content: center;
+            }
+
+            #aboutSection,
+            #itinerariesSection,
+            #valuesSection {
+                padding: 60px 0;
+            }
+
+            .aboutContentTitle,
+            .menuItinerariesTitle {
+                font-size: 2rem;
+            }
+
+            #roadItinerariesContainer {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container,
+            .home-container,
+            .about-container,
+            .products-container,
+            .values-container,
+            .footer-container {
+                padding: 0 1rem;
+            }
+
+            .homeContentTitle {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .itineraryCard,
+            .valuesBoxes {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Melhorias de acessibilidade */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* Estados de foco para acessibilidade */
+        .linkMenu:focus,
+        .btn:focus,
+        .contact-button:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Scroll suave customizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Estilos para o botão de volta ao topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: var(--shadow-medium);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Melhorias para imagens lazy loading */
+        img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Animações adicionais para cards */
+        .itineraryCard,
+        .valuesBoxes {
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-play-state: paused;
+        }
+
+        .itineraryCard:nth-child(1) { animation-delay: 0.1s; }
+        .itineraryCard:nth-child(2) { animation-delay: 0.2s; }
+        .itineraryCard:nth-child(3) { animation-delay: 0.3s; }
+        .itineraryCard:nth-child(4) { animation-delay: 0.4s; }
+
+        .valuesBoxes:nth-child(1) { animation-delay: 0.1s; }
+        .valuesBoxes:nth-child(2) { animation-delay: 0.2s; }
+        .valuesBoxes:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Estados de loading para botões */
+        .btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Melhorias de contraste para acessibilidade */
+        @media (prefers-contrast: high) {
+            :root {
+                --text-gray: #333;
+                --border-color: #999;
+            }
+        }
+
+        /* Dark mode support */
+        [data-theme="dark"] {
+            --bg-white: #1a1a1a;
+            --bg-light: #2a2a2a;
+            --text-dark: #ffffff;
+            --text-gray: #cccccc;
+            --text-light: #999999;
+            --border-color: #444444;
+            --shadow-light: 0 2px 10px rgba(255, 255, 255, 0.1);
+            --shadow-medium: 0 4px 20px rgba(255, 255, 255, 0.15);
+            --shadow-heavy: 0 8px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .itemsMenuNavList {
+            background: var(--bg-white);
+        }
+
+        [data-theme="dark"] nav {
+            background: var(--bg-white);
+            border-bottom-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .homeHeartImage {
+            filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+        }
+
+        [data-theme="dark"] footer {
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        }
+
+        /* Automatic dark mode - only if no manual preference set */
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme]) {
+                --bg-white: #1a1a1a;
+                --bg-light: #2a2a2a;
+                --text-dark: #ffffff;
+                --text-gray: #cccccc;
+                --text-light: #999999;
+                --border-color: #444444;
+                --shadow-light: 0 2px 10px rgba(255, 255, 255, 0.1);
+                --shadow-medium: 0 4px 20px rgba(255, 255, 255, 0.15);
+                --shadow-heavy: 0 8px 30px rgba(255, 255, 255, 0.2);
+            }
+
+            html:not([data-theme]) .itemsMenuNavList {
+                background: var(--bg-white);
+            }
+
+            html:not([data-theme]) nav {
+                background: var(--bg-white);
+                border-bottom-color: var(--border-color);
+            }
+
+            html:not([data-theme]) .homeHeartImage {
+                filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+            }
+
+            html:not([data-theme]) footer {
+                background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <div class="logoNavContainer">
+                <img class="logoNav" id="logo" src="/utils/hidro1.png" alt="Logo Hidro Evolution">
+                <span class="brand-text">Hidro Evolution</span>
+            </div>
+            <div class="nav-right">
+                <ul class="itemsMenuNavList" id="menu">
+                    <li class="itemMenu"><a class="linkMenu" href="#homeSection">Início</a></li>
+                    <li class="itemMenu"><a class="linkMenu" href="#aboutSection">Sobre</a></li>
+                    <li class="itemMenu"><a class="linkMenu" href="#itinerariesSection">Produtos</a></li>
+                    <li class="itemMenu"><a class="linkMenu" href="#contactSection">Contato</a></li>
+                    <li class="itemMenu"><a class="linkMenu" href="compliance_hidro.html" target="_blank" rel="noopener">Compliance</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <div class="hamburger" id="hamburger" aria-label="Menu de navegação">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section id="homeSection">
+        <div class="home-container">
+            <div class="homeTextContainer">
+                <img class="homeHeartImage" src="/utils/hidro1.png" alt="Logo Hidro Evolution">
+                <h1 class="homeContentTitle">Conheça nossos produtos</h1>
+                <p class="homeContentSubtitle">Trabalhamos com excelência e qualidade em soluções energéticas</p>
+                <div class="homeButtonsContainer">
+                    <a href="#itinerariesSection" class="btn btn-primary">
+                        <i class="fas fa-bolt"></i>
+                        Nossos produtos
+                    </a>
+                    <a href="#aboutSection" class="btn btn-outline">
+                        <i class="fas fa-info-circle"></i>
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+            <div class="homeImageWrapper">
+                <img class="homeImage" src="/utils/hidro5.png" alt="Gerador industrial da Hidro Evolution">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Nós -->
+    <section id="aboutSection">
+        <div class="about-container">
+            <div class="aboutImageWrapper">
+                <img class="aboutImage" src="/utils/hidro4.png" alt="Equipe e instalações da Hidro Evolution">
+            </div>
+            <div class="aboutTextWrapper">
+                <h2 class="aboutContentTitle">Nossa história</h2>
+                <p class="aboutContentTextItem">A Hidro Evolution nasceu há mais de 4 anos com a missão de oferecer soluções confiáveis e eficientes em energia, garantindo o funcionamento contínuo de negócios e residências.</p>
+                <p class="aboutContentTextItem">Especializada no fornecimento e manutenção de geradores, a empresa consolidou sua posição no mercado ao oferecer equipamentos de alta qualidade, sustentáveis e personalizados para atender às necessidades específicas de cada cliente.</p>
+                <p class="aboutContentTextItem"><strong>Garantimos energia onde e quando você precisar, com eficiência e responsabilidade.</strong></p>
+                <p class="aboutContentQuote">"Confiança em energia é confiar na Hidro Evolution!"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos -->
+    <section id="itinerariesSection">
+        <div class="products-container">
+            <h2 class="menuItinerariesTitle">Nossos produtos</h2>
+            <div id="roadItinerariesContainer">
+                <div class="itineraryCard">
+                    <img class="itineraryCardImage" src="/utils/hidro6.png" alt="Gerador cabinado a diesel">
+                    <h3 class="itineraryCardTitle">Geradores cabinados</h3>
+                    <p class="itineraryCardSubtitle">Geradores cabinados a diesel com proteção completa contra intempéries e baixo nível de ruído.</p>
+                </div>
+                <div class="itineraryCard">
+                    <img class="itineraryCardImage" src="/utils/hidro7.jpeg" alt="Grupo gerador aberto">
+                    <h3 class="itineraryCardTitle">Geradores abertos</h3>
+                    <p class="itineraryCardSubtitle">Grupos geradores abertos para aplicações que demandam alta potência e ventilação adequada.</p>
+                </div>
+                <div class="itineraryCard">
+                    <img class="itineraryCardImage" src="/utils/hidro8.jpeg" alt="Reboque para gerador">
+                    <h3 class="itineraryCardTitle">Reboque para gerador</h3>
+                    <p class="itineraryCardSubtitle">Plataformas de reboque robustas para transporte seguro e instalação móvel de geradores.</p>
+                </div>
+                <div class="itineraryCard">
+                    <img class="itineraryCardImage" src="/utils/hidro9.png" alt="Manutenção preventiva de geradores">
+                    <h3 class="itineraryCardTitle">Melhorias e manutenção preventiva</h3>
+                    <p class="itineraryCardSubtitle">Serviços especializados de manutenção preventiva e melhorias para máxima eficiência.</p>
+                </div>
+            </div>
+            <div class="itinerariesFooterContainer">
+                <p class="itinerariesCalToActionText">Se interessou? Faça um orçamento conosco!</p>
+                <a href="https://api.whatsapp.com/send?phone=5592993092793" class="btn btn-primary" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i>
+                    Clique aqui e saiba mais
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Valores -->
+    <section id="valuesSection">
+        <div class="values-container">
+            <div class="valuesContentWrapper">
+                <div class="valuesBoxes">
+                    <h3 class="valuesTitles">
+                        <i class="fas fa-heart" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                        Clientes Satisfeitos
+                    </h3>
+                    <p class="valuesText">Qualidade e confiança na entrega dos produtos, sempre priorizando a satisfação do cliente.</p>
+                </div>
+                <div class="valuesBoxes">
+                    <h3 class="valuesTitles">
+                        <i class="fas fa-user-tie" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                        Profissionais Qualificados
+                    </h3>
+                    <p class="valuesText">Equipe com experiência comprovada no mercado e certificações técnicas atualizadas.</p>
+                </div>
+                <div class="valuesBoxes">
+                    <h3 class="valuesTitles">
+                        <i class="fas fa-shield-alt" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                        Qualidade e Segurança
+                    </h3>
+                    <p class="valuesText">Planejamento cuidadoso, execução efetiva e total segurança em todos os processos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contactSection">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Contate-nos -->
+                <div class="footer-section">
+                    <h2><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Contate-nos</h2>
+                    <div class="moreContentOptionsWrapper">
+                        <a class="contact-button" href="mailto:construcoesevolution@evolutionengenharia.com.br">
+                            <i class="fas fa-envelope"></i>
+                            E-mail
+                        </a>
+                        <a class="contact-button" href="https://api.whatsapp.com/send?phone=5592993092793" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+            
+                <!-- Saiba Mais -->
+                <div class="footer-section">
+                    <h2><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>Saiba Mais</h2>
+                    <div class="moreContentOptionsWrapper">
+                        <a class="contact-button" href="#valuesSection">
+                            <i class="fas fa-star"></i>
+                            Nossos Valores
+                        </a>
+                        <a class="contact-button" href="compliance_hidro.html" target="_blank" rel="noopener">
+                            <i class="fas fa-file-alt"></i>
+                            Compliance
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Informações da Empresa -->
+                <div class="footer-section">
+                    <h2><i class="fas fa-building" style="margin-right: 0.5rem;"></i>Hidro Evolution</h2>
+                    <div class="moreContentOptionsWrapper">
+                        <p style="color: #ccc; margin-bottom: 1rem;">Soluções confiáveis em energia há mais de 4 anos</p>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <a href="#" class="contact-button" style="padding: 0.5rem;" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.instagram.com/hidroevolution.oficial/" class="contact-button" style="padding: 0.5rem;" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="contact-button" style="padding: 0.5rem;" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="footerRowContainer">
+                <div class="footerRowDescription">
+                    <p class="footerParagraphDescription">© Hidro Evolution, 2025</p>
+                    <p class="footerParagraphDescription">Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão de volta ao topo -->
+    <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const logo = document.getElementById('logo');
+
+        // Get saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const html = document.documentElement;
+
+        // Apply saved theme on load
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+                logo.src = '/utils/hidro2.png'; // Logo para modo escuro
+                // Alterar também a logo da seção hero
+                const heroLogo = document.querySelector('.homeHeartImage');
+                if (heroLogo) {
+                    heroLogo.src = '/utils/hidro2.png';
+                }
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                logo.src = '/utils/hidro1.png'; // Logo para modo claro
+                // Alterar também a logo da seção hero
+                const heroLogo = document.querySelector('.homeHeartImage');
+                if (heroLogo) {
+                    heroLogo.src = '/utils/hidro1.png';
+                }
+            }
+        }
+
+        // Initialize theme
+        applyTheme(savedTheme);
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Add animation class for smooth transition
+            document.body.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                document.body.style.transition = '';
+            }, 300);
+        });
+
+        // Menu mobile
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        const menuLinks = document.querySelectorAll('.linkMenu');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                menu.classList.remove('active');
+            });
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                menu.classList.remove('active');
+            }
+        });
+
+        // Botão volta ao topo
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Lazy loading para imagens
+        const images = document.querySelectorAll('img[src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Animação de contadores (opcional)
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 20);
+            });
+        };
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Adicionar loading state aos botões
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href && this.href.includes('whatsapp')) {
+                    this.classList.add('loading');
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                    }, 1000);
+                }
+            });
+        });
+
+        // Intersection Observer para animações
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animação
+        const elementsToAnimate = document.querySelectorAll('.itineraryCard, .valuesBoxes');
+        elementsToAnimate.forEach(el => observer.observe(el));
+
+        // Prevenir comportamento padrão em links externos
+        const externalLinks = document.querySelectorAll('a[target="_blank"]');
+        externalLinks.forEach(link => {
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        // Validação de formulário de contato (caso seja adicionado)
+        const validateEmail = (email) => {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        };
+
+        // Service Worker para cache (opcional - melhora performance)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

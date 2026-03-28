@@ -1,0 +1,266 @@
+# HidroApp - .htaccess para Produção (Hostinger)
+# Última atualização: 2025-10-17
+
+# ==============================================================================
+# 1. SEGURANÇA
+# ==============================================================================
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Desabilitar execução de PHP em diretórios de upload
+<Directory "uploads">
+    php_flag engine off
+</Directory>
+
+# Bloquear acesso a arquivos sensíveis
+<FilesMatch "(\.env|\.git|\.sql|\.md|db_local\.php|db_host\.php|config_local\.php|composer\.(json|lock))$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Proteger arquivos de configuração
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Proteger diretório vendor
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^vendor/(.*)$ - [F,L]
+</IfModule>
+
+# ==============================================================================
+# 2. PERFORMANCE E CACHE
+# ==============================================================================
+
+# Habilitar compressão GZIP
+<IfModule mod_deflate.c>
+    # Compressão de texto, html, javascript, css, xml
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Habilitar cache do navegador
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>
+
+# Headers de cache
+<IfModule mod_headers.c>
+    # Cache de 1 ano para imagens
+    <FilesMatch "\.(jpg|jpeg|png|gif|svg|ico)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+
+    # Cache de 1 mês para CSS e JavaScript
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2628000, public"
+    </FilesMatch>
+
+    # Sem cache para HTML e PHP
+    <FilesMatch "\.(html|htm|php)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+</IfModule>
+
+# ==============================================================================
+# 3. CONFIGURAÇÕES PHP
+# ==============================================================================
+
+<IfModule mod_php.c>
+    # Limite de memória
+    php_value memory_limit 256M
+
+    # Tamanho máximo de upload
+    php_value upload_max_filesize 20M
+    php_value post_max_size 20M
+
+    # Tempo máximo de execução
+    php_value max_execution_time 300
+    php_value max_input_time 300
+
+    # Timezone
+    php_value date.timezone "America/Sao_Paulo"
+
+    # Charset
+    php_value default_charset "UTF-8"
+
+    # Sessões
+    php_value session.cookie_httponly 1
+    php_value session.cookie_secure 0
+    php_value session.use_strict_mode 1
+    php_value session.gc_maxlifetime 7200
+
+    # Desabilitar exibição de erros em produção
+    php_flag display_errors Off
+    php_flag display_startup_errors Off
+    php_value error_reporting 0
+
+    # Log de erros
+    php_flag log_errors On
+    php_value error_log logs/php_errors.log
+</IfModule>
+
+# ==============================================================================
+# 4. REWRITE RULES
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forçar HTTPS (descomente se tiver SSL)
+    # RewriteCond %{HTTPS} !=on
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # Redirecionar www para não-www (descomente se necessário)
+    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # Bloquear acesso direto a arquivos PHP em certos diretórios
+    RewriteRule ^(vendor|logs|backups)/.*\.php$ - [F,L]
+
+    # Proteção contra hotlinking de imagens (opcional)
+    # RewriteCond %{HTTP_REFERER} !^$
+    # RewriteCond %{HTTP_REFERER} !^https?://(www\.)?seudominio\.com [NC]
+    # RewriteRule \.(jpg|jpeg|png|gif|svg)$ - [F,L]
+</IfModule>
+
+# ==============================================================================
+# 5. SEGURANÇA ADICIONAL
+# ==============================================================================
+
+# Prevenir clickjacking
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Content Security Policy (ajuste conforme necessário)
+    Header always set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'"
+</IfModule>
+
+# Proteção contra SQL Injection via URL
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC,OR]
+    RewriteCond %{QUERY_STRING} \=PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC,OR]
+    RewriteCond %{QUERY_STRING} (\.\./|\.\.) [OR]
+    RewriteCond %{QUERY_STRING} ftp\: [NC,OR]
+    RewriteCond %{QUERY_STRING} http\: [NC,OR]
+    RewriteCond %{QUERY_STRING} https\: [NC,OR]
+    RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
+    RewriteCond %{QUERY_STRING} ^(.*)/self/(.*)$ [NC,OR]
+    RewriteCond %{QUERY_STRING} ^(.*)cPath=http://(.*)$ [NC,OR]
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} (\<|%3C).*iframe.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<|%3C)([^i]*i)+frame.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+    RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+    RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
+    RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
+    RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+    RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+    RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
+    RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+    RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+    RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# Bloquear user agents maliciosos
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+    RewriteCond %{HTTP_USER_AGENT} ^(java|curl|wget) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|python|nikto|scan) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# ==============================================================================
+# 6. PÁGINAS DE ERRO PERSONALIZADAS
+# ==============================================================================
+
+ErrorDocument 400 /error.php?code=400
+ErrorDocument 401 /error.php?code=401
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+ErrorDocument 503 /error.php?code=503
+
+# ==============================================================================
+# 7. OTIMIZAÇÕES ESPECÍFICAS
+# ==============================================================================
+
+# Desabilitar ETags
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# Charset UTF-8 padrão
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .xml .json .rss .atom
+
+# Tipos MIME
+<IfModule mod_mime.c>
+    AddType application/javascript js
+    AddType application/json json
+    AddType application/x-font-ttf ttf
+    AddType application/x-font-opentype otf
+    AddType application/x-font-woff woff
+    AddType application/x-font-woff2 woff2
+    AddType image/svg+xml svg svgz
+    AddEncoding gzip svgz
+</IfModule>
+
+# ==============================================================================
+# 8. CONFIGURAÇÕES FINAIS
+# ==============================================================================
+
+# Timeout de conexão
+<IfModule mod_reqtimeout.c>
+    RequestReadTimeout header=20-40,MinRate=500 body=20,MinRate=500
+</IfModule>
+
+# Limite de tamanho de requisição
+LimitRequestBody 20971520
+
+# Seguir links simbólicos
+Options +FollowSymLinks
+
+# ==============================================================================
+# FIM DO ARQUIVO .htaccess
+# ==============================================================================

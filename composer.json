@@ -1,0 +1,12 @@
+{
+    "name": "jon-jon/hidroapp",
+    "authors": [
+        {
+            "name": "Jonas Pacheco",
+            "email": "jonasbrito1a@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "^8.2"
+    }
+}
