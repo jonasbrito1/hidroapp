@@ -2624,16 +2624,5 @@ function getStatusBadge($status) {
         }, { passive: true });
 
     </script>
-
-    <!-- Botão Flutuante (FAB) para Mobile - Novo Equipamento -->
-    <?php if (hasPermission('equipamentos', 'create')): ?>
-    <button class="fab-button d-md-none"
-            onclick="openModal('create')"
-            data-tooltip="Novo Equipamento"
-            aria-label="Criar novo equipamento">
-        <i class="bi bi-plus"></i>
-    </button>
-    <?php endif; ?>
-
 </body>
 </html>

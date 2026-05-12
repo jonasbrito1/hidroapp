@@ -4848,16 +4848,5 @@ function openModal(action, data = null) {
             }
         }
     </script>
-
-    <!-- Botão Flutuante (FAB) para Mobile - Nova Manutenção -->
-    <?php if (hasPermission('manutencoes', 'create')): ?>
-    <button class="fab-button d-md-none"
-            onclick="openModal('create')"
-            data-tooltip="Nova Manutenção"
-            aria-label="Criar nova manutenção">
-        <i class="bi bi-plus"></i>
-    </button>
-    <?php endif; ?>
-
 </body>
 </html>
